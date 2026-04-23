@@ -1,0 +1,38 @@
+{
+  "playlists": [
+    {
+      "title": "Documentare și Știință",
+      "videos": [
+        {
+          "title": "O călătorie prin Sistemul Solar",
+          "url": "https://www.youtube.com/watch?v=libKVRa01L8"
+        },
+        {
+          "title": "Cum funcționează fizica cuantică?",
+          "url": "https://www.youtube.com/watch?v=p7bobijCE4w"
+        },
+        {
+          "title": "Istoria inteligenței artificiale",
+          "url": "https://www.youtube.com/watch?v=R9K4_gI6Zc8"
+        }
+      ]
+    },
+    {
+      "title": "Muzică Ambientală (Lofi / Jazz)",
+      "videos": [
+        {
+          "title": "Lofi hip hop radio - beats to relax/study to (Lofi Girl)",
+          "url": "https://www.youtube.com/watch?v=jfKfPfyJRdk"
+        },
+        {
+          "title": "Jazz ambiental relaxant (Rain in Paris)",
+          "url": "https://www.youtube.com/watch?v=Dx5qFachd3A"
+        },
+        {
+          "title": "Piano & Cello - Studiu și Focus",
+          "url": "https://www.youtube.com/watch?v=mIYzpCGuIjc"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ro" class="dark">
+<head>
+    <meta charset="utf-8">
+    <title>MyTube Dash</title>
+    <!-- Fără tag-uri dinamice. Fără <base>. Doar legături relative. -->
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        // Design ultra-profesionist Dark Mode (tip MacOS/Glassmorphism)
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: { 
+                    colors: { 
+                        zinc: { 900: '#18181b', 800: '#27272a', 700: '#3f3f46'},
+                        surface: '#09090b', // Negru extrem de ușor spălat pentru panouri
+                        dash: '#000000'     // Negru absolut pentru adâncime (fundal spate)
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dash text-zinc-100 flex h-screen overflow-hidden antialiased selection:bg-white/20 selection:text-white">
+    <!-- Meniu Lateral (Sidebar) -->
+    <aside class="w-52 bg-surface border-r border-white/5 flex flex-col shrink-0 drop-shadow-2xl z-10 relative">
+        <div class="h-16 flex items-center px-5 border-b border-white/5 mt-2">
+            <div class="flex items-center gap-2.5 font-bold text-[15px] tracking-tight text-white cursor-default">
+                <div class="w-7 h-7 rounded-lg bg-white flex items-center justify-center shadow-lg shadow-white/10">
+                    <span class="material-icons text-black text-[16px] translate-x-[1px]">play_arrow</span>
+                </div>
+                MyTube Dash
+            </div>
+        </div>
+        
+        <div class="px-5 pt-8 pb-3 text-[10px] font-bold text-zinc-500 uppercase tracking-widest select-none">
+            Colecții Videoclipuri
+        </div>
+        
+        <div id="sidebar-playlists" class="flex-1 overflow-y-auto px-3 space-y-1 custom-scrollbar pb-6">
+            <!-- Playlist-urile vor fi generate de app.js aici -->
+        </div>
+
+        <div class="px-3 pb-4 pt-4 border-t border-white/5 bg-gradient-to-t from-surface to-transparent">
+            <button onclick="openReadmePopup()" class="w-full flex items-center justify-center gap-2 px-3 py-2.5 hover:bg-white/5 rounded-xl text-center transition-colors text-zinc-500 hover:text-zinc-300 text-xs font-semibold tracking-wide select-none">
+                <span class="material-icons text-[16px]"></span> @ concept și realizare vlad 39
+            </button>
+        </div>
+    </aside>
+
+    <!-- Zona Principală de Video -->
+    <main id="app-content" class="flex-1 flex flex-col items-center justify-start bg-dash custom-scrollbar overflow-y-auto w-full p-8 lg:p-12 relative">
+        <!-- Spotlight pur și fin pe fundal -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-white/[0.015] blur-[120px] rounded-full pointer-events-none"></div>
+        
+        <!-- Conținut JS (izolat pentru stratificare corectă) -->
+        <div id="app-container" class="w-full z-10 relative"></div>
+    </main>
+
+    <!-- Modal pentru README -->
+    <div id="readme-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4 transition-all duration-300" onclick="closeReadmePopup()">
+        <div class="bg-surface border border-white/10 rounded-2xl w-full max-w-3xl max-h-[85vh] flex flex-col shadow-2xl overflow-hidden ring-1 ring-white/5" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-center p-4 border-b border-white/5 bg-white/[0.02]">
+                <h3 class="font-semibold text-sm text-zinc-200 ml-2 tracking-wide flex items-center gap-2"><span class="material-icons text-[16px] text-zinc-400">description</span> Documentație MyTube Dash</h3>
+                <button onclick="closeReadmePopup()" class="w-8 h-8 flex items-center justify-center rounded-lg text-zinc-500 hover:text-white hover:bg-white/10 transition-colors"><span class="material-icons text-[18px]">close</span></button>
+            </div>
+            <div id="readme-content" class="p-8 overflow-y-auto prose prose-sm md:prose-base prose-invert prose-zinc max-w-none custom-scrollbar text-zinc-300"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
