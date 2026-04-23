@@ -1,22 +1,24 @@
 # 📺 MyTube Dash
 
-> **Dashboard personal pentru vizionarea clipurilor YouTube.**
+> **Dashboard personal pentru vizionarea clipurilor YouTube. Fără algoritmi, fără notificări, 100% control vizual.**
 
-![Versiune](https://img.shields.io/badge/versiune-4.0.0-blue.svg)
+![Versiune](https://img.shields.io/badge/versiune-4.1.0-blue.svg)
 ![Arhitectura](https://img.shields.io/badge/arhitectură-Vanilla_JS_|_NGINX-red.svg)
 ![Date](https://img.shields.io/badge/bază_de_date-data.json-4CAF50.svg)
 ![Setup](https://img.shields.io/badge/platformă-Home_Assistant_Add--on-03A9F4.svg)
 
 **MyTube Dash** este o aplicație web nativă, minimalistă, creată cu un singur scop: să ofere o evadare din „rabbit-hole-ul” algoritmilor YouTube. Aduni strict videoclipurile pe care vrei să le urmărești (podcasturi, documentare, tutoriale) și le vizionezi într-un mediu profund izolat.
 
-Începând cu versiunea 4.0, aplicația a primit un design premium tip *Glassmorphism* (colțuri rafinate, transparențe blânde, fundal întunecat) și o arhitectură super-stabilă bazată exclusiv pe un singur fișier text pentru stocarea datelor.
+Începând cu versiunea 4.1, aplicația aduce un nivel superior de stabilitate și productivitate, adăugând un motor de căutare live și protecție sistematică împotriva erorilor de sintaxă la scrierea bazei de date.
 
 ---
 
 ## ✨ Funcționalități Principale
 
 *   **🚫 Fără Recomandări:** Videoclipurile rulează pe ecran complet prin modulul oficial de Embed, blocând fluxurile de recomandări de la final și distragerile laterale.
-*   **💾 Stocare JSON 100% Sigură:** . Baza de date este strict fișierul fizic `data.json`. Tu controlezi textul, tu deții datele pentru totdeauna.
+*   **🔍 Căutare Globală Rapidă (Live Search):** Găsește video-ul preferat instant. Bara de căutare filtrează în timp real titlurile clipurilor și ale colecțiilor din întreaga bază de date, etichetând elegant sursa fiecărui rezultat.
+*   **🛡️ Validator JSON de Siguranță:** Editarea manuală a bazei de date e acum complet sigură. Dacă omiți o virgulă sau greșești o ghilimea în `data.json`, aplicația te va alerta vizual, afișând un raport clar al zonei în care s-a produs eroarea de sintaxă.
+*   **💾 Stocare JSON 100% Sigură:** Baza de date este strict fișierul fizic `data.json`. Tu controlezi textul, tu deții datele pentru totdeauna.
 *   **🧠 Preluare Automată:** Tu treci în fișier doar titlul dorit și adresa web (URL-ul) către YouTube. Aplicația extrage singură în fundal codurile video și imaginile de copertă la rezoluție maximă.
 *   **🎨 High-End UI:** Construit nativ cu ajutorul *Tailwind CSS*. Efecte fine de fade-in, umbre subtile de profunzime tip macOS, scrollbar-uri minimaliste și butoane plutitoare de play la intersecția cu mouse-ul.
 *   **🚀 Ultra-ușor:** Niciun framework (fără Angular, React, Vue). Fără node_modules. Servește doar fisiere de bază prin NGINX. Consumă ~0% CPU în mod repaus pe Home Assistant.
@@ -57,7 +59,7 @@ Aplicația vine pregătită standard cu tot ce are nevoie mediul Home Assistant 
 1. Mergi în **Settings** -> **Add-ons** -> **Add-on Store**.
 2. Dă click pe cele 3 puncte (dreapta-sus) -> **Repositories**.
 3. Adaugă adresa `URL` a contului/repo-ului tău de GitHub unde ai urcat aceste fișiere.
-4. Caută în listă la repository-ul tocmai adăugat **"MyTube Dash - Persistant Edition"** și dă-i "Install".
+4. Caută în listă la repository-ul tocmai adăugat **"MyTube Dash - Vanilla Edition"** și dă-i "Install".
 5. Bifează **"Show in sidebar"** și apasă **Start**.
 
 Când vrei să adaugi un clip nou: modifici `data.json` la tine pe GitHub/local, iar în Home Assistant la Add-on apasă butonul de **Actualizare** (sau Rebuild) ca să descarce fișierul modificat.
