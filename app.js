@@ -127,10 +127,15 @@ function updateSidebarHighlight(selectedId) {
     });
 }
 
+// Curățare diacritice pentru căutare impecabilă
+function removeDiacritics(str) {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
 // Logică Live Search
 function handleGlobalSearch(query) {
     currentSearchQuery = query;
-    const q = query.trim().toLowerCase();
+    const q = removeDiacritics(query.trim().toLowerCase());
     
     if (!q) {
         // Dacă a sters cuvântul, revine la Playlistul vizionat anterior
@@ -142,8 +147,11 @@ function handleGlobalSearch(query) {
     // Anulăm "selecția" din meniul lateral (căci suntem în vizualizare Globală)
     updateSidebarHighlight(null);
     
-    // Căutare combinată: și în titlul clipului, dar și în titlul playlistului
-    const vids = store.videos.filter(v => v.title.toLowerCase().includes(q) || v.playlistName.toLowerCase().includes(q));
+    // Căutare combinată fără diacritice: și în titlul clipului, dar și în titlul playlistului
+    const vids = store.videos.filter(v => 
+        removeDiacritics(v.title.toLowerCase()).includes(q) || 
+        removeDiacritics(v.playlistName.toLowerCase()).includes(q)
+    );
     const main = document.getElementById('app-container');
     
     let html = `
