@@ -4,6 +4,36 @@ let store = {
     videos: []
 };
 
+// Theme si Hamburger Logic
+function toggleTheme() {
+    const isDark = document.documentElement.classList.contains('dark');
+    if (isDark) {
+        document.documentElement.classList.remove('dark');
+        localStorage.theme = 'light';
+    } else {
+        document.documentElement.classList.add('dark');
+        localStorage.theme = 'dark';
+    }
+}
+
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('mobile-overlay');
+    
+    if (sidebar.classList.contains('-translate-x-[110%]')) {
+        // Deschidere sidebar
+        sidebar.classList.remove('-translate-x-[110%]');
+        overlay.classList.remove('hidden');
+        // Mic delay pentru a declanșa animația de fade
+        requestAnimationFrame(() => overlay.classList.remove('opacity-0'));
+    } else {
+        // Închidere sidebar
+        sidebar.classList.add('-translate-x-[110%]');
+        overlay.classList.add('opacity-0');
+        setTimeout(() => overlay.classList.add('hidden'), 300); // 300ms e durata animației în utilitarul tailwind
+    }
+}
+
 // Navigare / Stare
 let activePlaylistId = null;
 let currentSearchQuery = '';
@@ -53,6 +83,7 @@ async function initApp() {
                                 title: vid.title,
                                 url: vid.url,
                                 youtubeId: yid,
+                                duration: vid.duration || "",
                                 thumbnail: `https://img.youtube.com/vi/${yid}/hqdefault.jpg`
                             });
                         }
@@ -79,10 +110,10 @@ function showEmptyState(msg) {
     const main = document.getElementById('app-container');
     main.innerHTML = `
         <div class="flex flex-col items-center justify-center h-[70vh] animate-fade-in text-center max-w-xl mx-auto px-6">
-            <div class="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center mb-6 shadow-inner ring-1 ring-white/10">
+            <div class="w-20 h-20 rounded-full bg-zinc-200 dark:bg-white/5 flex items-center justify-center mb-6 shadow-inner ring-1 ring-zinc-300 dark:ring-white/10 transition-colors duration-300">
                 <span class="material-icons text-4xl text-zinc-500">code_off</span>
             </div>
-            <p class="text-zinc-400 font-medium text-sm leading-relaxed">${msg}</p>
+            <p class="text-zinc-600 dark:text-zinc-400 font-medium text-sm leading-relaxed">${msg}</p>
         </div>
     `;
 }
@@ -107,7 +138,7 @@ function renderSidebar() {
         const btn = document.createElement('button');
         // Adăugăm un atribut data pentru manipulare dinamică (aprindere)
         btn.dataset.id = pl.id;
-        btn.className = "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-zinc-450 hover:bg-white/[0.04] hover:text-white transition-all group text-[13px] font-semibold border border-transparent";
+        btn.className = "w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-zinc-600 dark:text-zinc-400 hover:bg-white/50 dark:hover:bg-white/5 hover:text-zinc-900 dark:hover:text-white transition-all group text-[14px] font-medium border border-transparent hover:border-zinc-200/50 dark:hover:border-white/5 shadow-sm hover:shadow-md";
         btn.innerHTML = `<span class="truncate">${pl.name}</span>`;
         btn.onclick = () => renderPlaylist(pl.id);
         plDiv.appendChild(btn);
@@ -118,11 +149,11 @@ function renderSidebar() {
 function updateSidebarHighlight(selectedId) {
     document.querySelectorAll('#sidebar-playlists button').forEach(btn => {
         if (btn.dataset.id === selectedId) {
-            btn.classList.add('bg-white/[0.08]', 'text-white', 'border-white/[0.08]');
-            btn.classList.remove('hover:bg-white/[0.04]', 'text-zinc-450');
+            btn.classList.add('bg-white', 'dark:bg-white/10', 'text-orange-600', 'dark:text-orange-400', 'border-zinc-200/50', 'dark:border-white/10', 'shadow-md');
+            btn.classList.remove('hover:bg-white/50', 'dark:hover:bg-white/5', 'text-zinc-600', 'dark:text-zinc-400', 'border-transparent', 'shadow-sm');
         } else {
-            btn.classList.remove('bg-white/[0.08]', 'text-white', 'border-white/[0.08]');
-            btn.classList.add('hover:bg-white/[0.04]', 'text-zinc-450');
+            btn.classList.remove('bg-white', 'dark:bg-white/10', 'text-orange-600', 'dark:text-orange-400', 'border-zinc-200/50', 'dark:border-white/10', 'shadow-md');
+            btn.classList.add('hover:bg-white/50', 'dark:hover:bg-white/5', 'text-zinc-600', 'dark:text-zinc-400', 'border-transparent', 'shadow-sm');
         }
     });
 }
@@ -155,17 +186,17 @@ function handleGlobalSearch(query) {
     const main = document.getElementById('app-container');
     
     let html = `
-        <div class="w-full max-w-[1400px] flex flex-col mx-auto animate-fade-in pb-12">
-            <div class="flex items-end justify-between mb-8 pb-3 border-b border-white/5">
-                <div class="flex flex-col gap-1.5">
-                    <h2 class="text-3xl md:text-3xl font-bold tracking-tight text-white focus:outline-none">Căutare: "${q}"</h2>
+        <div class="w-full max-w-[1400px] flex flex-col mx-auto animate-slide-up pb-16">
+            <div class="flex items-end justify-between mb-8 pb-4 border-b border-zinc-200/50 dark:border-white/10 transition-colors duration-300">
+                <div class="flex flex-col gap-2">
+                    <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-zinc-900 dark:text-white focus:outline-none drop-shadow-sm dark:drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">Căutare: "${q}"</h2>
                 </div>
-                <div class="px-4 py-1.5 rounded-full bg-white/5 border border-white/5 text-zinc-300 text-xs font-semibold shadow-sm backdrop-blur-sm">${vids.length} găsite</div>
+                <div class="px-5 py-2 rounded-full bg-white/70 dark:bg-white/10 border border-zinc-300/50 dark:border-white/20 text-orange-600 dark:text-orange-400 text-xs font-bold tracking-wide shadow-sm backdrop-blur-md transition-colors duration-300 ring-1 ring-black/5 dark:ring-white/5 uppercase">${vids.length} găsite</div>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">`;
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">`;
             
     if (vids.length === 0) {
-        html += `<div class="col-span-full py-20 text-center text-zinc-500 text-sm">Nu a fost găsit niciun videoclip conform căutării tale.</div>`;
+        html += `<div class="col-span-full py-32 text-center text-zinc-500 font-medium text-lg">Nu a fost găsit niciun videoclip conform căutării tale.</div>`;
     } else {
         html += generateVideoGridHtml(vids);
     }
@@ -191,22 +222,22 @@ function renderPlaylist(id) {
     const main = document.getElementById('app-container');
     
     let html = `
-        <div class="w-full max-w-[1400px] flex flex-col mx-auto animate-fade-in pb-12">
-            <div class="flex items-end justify-between mb-8 pb-3 border-b border-white/5">
-                <div class="flex flex-col gap-1.5">
-                    <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-white">${pl.name}</h2>
+        <div class="w-full max-w-[1400px] flex flex-col mx-auto animate-slide-up pb-16">
+            <div class="flex items-end justify-between mb-8 pb-4 border-b border-zinc-200/50 dark:border-white/10 transition-colors duration-300">
+                <div class="flex flex-col gap-2">
+                    <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-zinc-900 dark:text-white transition-colors duration-300 drop-shadow-sm dark:drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">${pl.name}</h2>
                 </div>
-                <div class="px-4 py-1.5 rounded-full bg-white/5 border border-white/5 text-zinc-300 text-xs font-semibold shadow-sm backdrop-blur-sm">${vids.length} clipuri</div>
+                <div class="px-5 py-2 rounded-full bg-white/70 dark:bg-white/10 border border-zinc-300/50 dark:border-white/20 text-orange-600 dark:text-orange-400 text-xs font-bold tracking-wide shadow-sm backdrop-blur-md transition-colors duration-300 ring-1 ring-black/5 dark:ring-white/5 uppercase">${vids.length} clipuri</div>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">`;
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">`;
     
     if(vids.length === 0) {
-        html += `<div class="col-span-full py-24 flex flex-col items-center justify-center text-center border border-dashed border-white/10 rounded-2xl bg-white/[0.01]">
-                    <div class="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-6 shadow-inner ring-1 ring-white/5">
-                        <span class="material-icons text-3xl text-zinc-500">video_library</span>
+        html += `<div class="col-span-full py-32 flex flex-col items-center justify-center text-center border border-dashed border-zinc-300 dark:border-white/20 rounded-[2rem] bg-white/30 dark:bg-white/[0.02] backdrop-blur-sm transition-all duration-300">
+                    <div class="w-20 h-20 rounded-full bg-white dark:bg-white/5 flex items-center justify-center mb-6 shadow-xl ring-1 ring-zinc-200 dark:ring-white/10 transition-colors duration-300">
+                        <span class="material-icons text-4xl text-orange-500">video_library</span>
                     </div>
-                    <h3 class="text-lg font-medium text-white mb-2">Acest playlist este gol</h3>
-                    <p class="text-zinc-500 font-normal max-w-sm text-sm">Adaugă videoclipuri în fișierul <strong>data.json</strong> pentru a popula această colecție.</p>
+                    <h3 class="text-xl font-bold text-zinc-900 dark:text-white mb-2 transition-colors duration-300">Acest playlist este gol</h3>
+                    <p class="text-zinc-500 dark:text-zinc-400 font-medium max-w-sm text-sm transition-colors duration-300">Adaugă videoclipuri în fișierul <strong>data.json</strong> pentru a popula această colecție.</p>
                  </div>`;
     } else {
         html += generateVideoGridHtml(vids);
@@ -222,23 +253,28 @@ function generateVideoGridHtml(vids) {
     vids.forEach(v => {
         // Dacă e afișaj global (cautare), arata prin tag în stânga-sus la ce playlist apartine clipul 
         const badgeHtml = currentSearchQuery 
-            ? `<span class="absolute top-3 right-3 bg-black/60 backdrop-blur-md px-2 py-1 rounded border border-white/10 text-[10px] font-bold text-zinc-300 uppercase tracking-wider shadow-lg">${v.playlistName}</span>` 
+            ? `<span class="absolute top-3 right-3 bg-black/40 backdrop-blur-md px-2.5 py-1 rounded border border-white/20 text-[10px] font-bold text-white uppercase tracking-wider shadow-lg z-10">${v.playlistName}</span>` 
             : '';
 
+        const durationHtml = v.duration ? `<span class="absolute bottom-2 right-2 bg-black/60 backdrop-blur-md px-1.5 py-0.5 rounded text-[11px] font-mono font-bold text-white/90 border border-white/10 shadow-sm z-10">${v.duration}</span>` : '';
+
         html += `
-        <div class="bg-surface border border-white/5 flex flex-col rounded-2xl overflow-hidden group cursor-pointer hover:border-white/20 hover:bg-white/[0.02] transition-all duration-300 shadow-xl shadow-black/50" onclick="playVideo('${v.youtubeId}')">
-            <div class="aspect-video relative bg-zinc-900 w-full overflow-hidden">
-                <img src="${v.thumbnail}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300"></div>
-                ${badgeHtml}
-                <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <div class="w-14 h-14 rounded-full bg-black/40 flex items-center justify-center backdrop-blur-md border border-white/20 transform scale-90 group-hover:scale-100 transition-all duration-300 shadow-2xl">
-                         <span class="material-icons text-white text-[28px] translate-x-[2px]">play_arrow</span>
+        <div class="bg-white/50 dark:bg-black/20 backdrop-blur-md border border-white/60 dark:border-white/10 flex flex-col rounded-[1.5rem] overflow-hidden group cursor-pointer hover:border-orange-500/50 hover:bg-white/80 dark:hover:bg-white/5 transition-all duration-500 shadow-[0_8px_32px_rgba(0,0,0,0.05)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:-translate-y-1 hover:shadow-orange-500/10" onclick="playVideo('${v.youtubeId}')">
+            <div class="aspect-video relative w-full overflow-hidden p-2 pb-0">
+                <div class="w-full h-full relative rounded-t-[1.1rem] overflow-hidden bg-zinc-200/50 dark:bg-zinc-800/50 animate-pulse-slow">
+                    <img src="${v.thumbnail}" loading="lazy" onload="this.parentElement.classList.remove('animate-pulse-slow'); this.classList.remove('opacity-0'); this.classList.add('opacity-100');" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-700 ease-out opacity-0" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-300"></div>
+                    ${badgeHtml}
+                    ${durationHtml}
+                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-20">
+                        <div class="w-14 h-14 rounded-full bg-orange-600/80 flex items-center justify-center backdrop-blur-md border border-orange-400/50 transform scale-75 group-hover:scale-100 transition-all duration-500 shadow-[0_0_20px_rgba(249,115,22,0.6)]">
+                             <span class="material-icons text-white text-[28px] translate-x-[2px]">play_arrow</span>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="p-5 flex flex-1 flex-col justify-center items-start gap-3 relative">
-                <h3 class="font-medium text-sm text-zinc-100 leading-relaxed line-clamp-2">${v.title}</h3>
+            <div class="p-5 flex flex-1 flex-col justify-start items-start gap-3 relative">
+                <h3 class="font-semibold text-sm lg:text-base text-zinc-900 dark:text-zinc-100 leading-snug line-clamp-2 transition-colors duration-300 group-hover:text-orange-600 dark:group-hover:text-orange-400">${v.title}</h3>
             </div>
         </div>`;
     });
@@ -248,13 +284,13 @@ function generateVideoGridHtml(vids) {
 function playVideo(ytId) {
      const main = document.getElementById('app-container');
      main.innerHTML = `
-        <div class="w-full max-w-[1200px] flex flex-col mx-auto h-[80vh] min-h-[500px] animate-fade-in relative z-10 pb-8">
-             <button onclick="goBack()" class="self-start flex items-center justify-center gap-2 text-zinc-400 hover:text-white mb-6 transition-all px-3 py-1.5 rounded-lg hover:bg-white/10 text-sm font-medium border border-transparent hover:border-white/10">
-                 <span class="material-icons text-[16px]">arrow_back</span> Întoarce-te
+        <div class="w-full max-w-[1400px] flex flex-col mx-auto h-[85vh] min-h-[500px] animate-slide-up relative z-10 pb-8">
+             <button onclick="goBack()" class="self-start flex items-center justify-center gap-2 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white mb-6 transition-all px-4 py-2 rounded-xl hover:bg-white/50 dark:hover:bg-white/10 shadow-sm hover:shadow-md text-sm font-semibold border border-transparent hover:border-zinc-300 dark:hover:border-white/10 backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-orange-500/50">
+                 <span class="material-icons text-[18px]">arrow_back</span> Înapoi
              </button>
-             <div class="w-full h-full bg-black rounded-2xl overflow-hidden shadow-2xl border border-white/10 ring-1 ring-white/5 relative group">
-                 <div class="absolute inset-0 flex items-center justify-center bg-zinc-900 -z-10 animate-pulse">
-                     <span class="material-icons text-white/20 text-5xl">smart_display</span>
+             <div class="w-full h-full bg-black/80 backdrop-blur-2xl rounded-[2rem] overflow-hidden shadow-[0_32px_64px_rgba(0,0,0,0.2)] dark:shadow-[0_32px_64px_rgba(0,0,0,0.6)] border border-white/20 dark:border-white/10 ring-1 ring-white/10 relative group transition-all duration-500 hover:shadow-[0_32px_64px_rgba(249,115,22,0.15)]">
+                 <div class="absolute inset-0 flex items-center justify-center bg-black/50 -z-10 animate-pulse">
+                     <span class="material-icons text-orange-500/30 text-6xl">smart_display</span>
                  </div>
                  <iframe class="w-full h-full relative z-10" id="yt-player"
                          src="https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0" 
@@ -284,7 +320,14 @@ function goBack() {
 function openReadmePopup() {
     const modal = document.getElementById('readme-modal');
     const content = document.getElementById('readme-content');
+    const innerModal = document.getElementById('readme-modal-inner');
+    
     modal.classList.remove('hidden');
+    // Mic tratament pt animatie fluida UI
+    requestAnimationFrame(() => {
+        innerModal.classList.remove('scale-95', 'opacity-0');
+        innerModal.classList.add('scale-100', 'opacity-100');
+    });
     
     marked.setOptions({ breaks: true });
     
@@ -299,7 +342,16 @@ function openReadmePopup() {
 }
 
 function closeReadmePopup() {
-    document.getElementById('readme-modal').classList.add('hidden');
+    const innerModal = document.getElementById('readme-modal-inner');
+    const modal = document.getElementById('readme-modal');
+    
+    innerModal.classList.remove('scale-100', 'opacity-100');
+    innerModal.classList.add('scale-95', 'opacity-0');
+    
+    // Asteapta terminarea tranzitiei (300ms)
+    setTimeout(() => {
+        modal.classList.add('hidden');
+    }, 300);
 }
 
 // Pornire Aplicație

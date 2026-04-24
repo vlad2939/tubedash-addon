@@ -35,17 +35,17 @@
     {
       "title": "Muzică Rock & Classic",
       "videos": [
-        { "title": "Solo-uri legendare din Rock", "url": "https://www.youtube.com/watch?v=mIYzpCGuIjc" },
-        { "title": "Istoria formației Queen", "url": "https://www.youtube.com/watch?v=Dx5qFachd3A" },
-        { "title": "Cum se orchestrează un film?", "url": "https://www.youtube.com/watch?v=mIYzpCGuIjc" }
+        { "title": "Clip #01", "url": "https://www.youtube.com/watch?v=mIYz......", "duration": "8:15" },
+        { "title": "Clip #02", "url": "https://www.youtube.com/watch?v=Dx5q......", "duration": "12:45" },
+        { "title": "Clip #03", "url": "https://www.youtube.com/watch?v=mIYz......", "duration": "18:10" }
       ]
     },
     {
       "title": "Podcasturi Extra-Lungi",
       "videos": [
-        { "title": "Podcast #01 - Despre Originile Universului (3 Ore)", "url": "https://www.youtube.com/watch?v=p7bobijCE4w" },
-        { "title": "Podcast #02 - Inteligența Artificială în 2025", "url": "https://www.youtube.com/watch?v=aircAruvnKk" },
-        { "title": "Povești Antreprenoriale de Succes - 4 Ore Editie", "url": "https://www.youtube.com/watch?v=fENyEI0oQaw" }
+        { "title": "Podcast #01", "url": "https://www.youtube.com/watch?v=p7b......", "duration": "10:15" },
+        { "title": "Podcast #02", "url": "https://www.youtube.com/watch?v=air......", "duration": "16:35" },
+        { "title": "Podcast #03", "url": "https://www.youtube.com/watch?v=fEN......", "duration": "17:45" }
       ]
     }
   ]
