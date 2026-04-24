@@ -1,30 +1,32 @@
 {
   "playlists": [
     {
-      "title": "Spațiu & Astronomie",
+      "title": "Mont Blanc",
       "videos": [
-        { "title": "Călătorie prin Sistemul Solar - Partea 1", "url": "https://www.youtube.com/watch?v=libKVRa01L8" },
-        { "title": "Ce se află într-o gaură neagră?", "url": "https://www.youtube.com/watch?v=p7bobijCE4w" },
-        { "title": "Istoria Universului pe scurt", "url": "https://www.youtube.com/watch?v=aircAruvnKk" },
-        { "title": "Misterele planetei Marte", "url": "https://www.youtube.com/watch?v=R9K4_gI6Zc8" },
-        { "title": "Cum s-a format Luna?", "url": "https://www.youtube.com/watch?v=fENyEI0oQaw" },
-        { "title": "Telescopul James Webb - Primele Imagini", "url": "https://www.youtube.com/watch?v=libKVRa01L8" },
-        { "title": "Suntem singuri în Univers?", "url": "https://www.youtube.com/watch?v=p7bobijCE4w" },
-        { "title": "Cum arată marginea spațiului?", "url": "https://www.youtube.com/watch?v=aircAruvnKk" },
-        { "title": "Fizica Spațială Explicată", "url": "https://www.youtube.com/watch?v=R9K4_gI6Zc8" },
-        { "title": "Teoria Relativității (Einstein)", "url": "https://www.youtube.com/watch?v=fENyEI0oQaw" }
+        { "title": "Golubat - 17.08.2023", "url": "https://youtu.be/XWn3rAFC-BI" },
+        { "title": "Etroubles - Aosta - 20.08.2023", "url": "https://youtu.be/fGwlKNpKnkU" },
+        { "title": "Col du Saint Bernard - 20.08.2023", "url": "https://youtu.be/T7ueovBS7rE" },
+        { "title": "Aiguille du Midi - 21.08.2023", "url": "https://youtu.be/Tp_eU142nBQ" },
+        { "title": "Chamonix - 21.08.2023", "url": "https://youtu.be/q8wVbc33nWQ" },
+        { "title": "Brevent - 21.08.2023", "url": "https://youtu.be/FFdRhUUjFZI" },
+        { "title": "Lac Blanc - 22.08.2023", "url": "https://youtu.be/-4RxD5A5V5g" },
+        { "title": "Bossons - 22.08.2023", "url": "https://youtu.be/PPFFMqtIO2o" },
+		{ "title": "Mer de Glace - 23.08.2023", "url": "https://youtu.be/XHlCilMzmog" },
+        { "title": "Bellevue - 23.08.2023", "url": "https://youtu.be/8CYKweQ2kI4" },
+        { "title": "Franta Alpin - 24.08.2023", "url": "https://youtu.be/gqS-8GBTSf8" },
+		{ "title": "Muzeu Ferrari - 25.08.2023", "url": "https://youtu.be/bXD55gFDFes" }
       ]
     },
     {
-      "title": "IT, Programare & Tech",
+      "title": "Via Ferrata",
       "videos": [
-        { "title": "Introducere în Javascript Modern", "url": "https://www.youtube.com/watch?v=jNQXAC9IVRw" },
-        { "title": "Cum funcționează Inteligența Artificială", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
-        { "title": "Ce este un API și cum îl folosești", "url": "https://www.youtube.com/watch?v=libKVRa01L8" },
-        { "title": "Baze de Date Relationale vs NoSQL", "url": "https://www.youtube.com/watch?v=p7bobijCE4w" },
-        { "title": "Tailwind CSS - Ghid Complet", "url": "https://www.youtube.com/watch?v=aircAruvnKk" },
-        { "title": "Cum se construiește un server Node.js", "url": "https://www.youtube.com/watch?v=R9K4_gI6Zc8" },
-        { "title": "Docker explicat în 10 minute", "url": "https://www.youtube.com/watch?v=fENyEI0oQaw" },
+        { "title": "Baia de Fier 1 - 09.09.2023", "url": "https://youtu.be/iyzffAEI2lk" },
+        { "title": "Baia de Fier 2 - 30.09.2023", "url": "https://youtu.be/3EjaYyH3WsI" },
+        { "title": "Baia de Fier 3 - 27.07.2024", "url": "https://youtu.be/-kcO4zjVdxI" },
+        { "title": "Astragalus - Cheile Bicazului - 11.08.2024", "url": "https://youtu.be/RRqxdyh0SXY" },
+        { "title": "Grota lui Hili - Cheile Turzii - 25.08.2024", "url": "https://youtu.be/8tFHRIc-bIs" },
+        { "title": "Soim Calator - Cheile Varghisului - 07.09.2024", "url": "https://youtu.be/LApyhzUYz2o" },
+        { "title": "Baia de Fier - Dorin - 22.06.2025", "url": "https://youtu.be/dd_wRv9H8cg" },
         { "title": "Cum gândește un Software Engineer", "url": "https://www.youtube.com/watch?v=jNQXAC9IVRw" },
         { "title": "Securitate Cibernetică de bază", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
         { "title": "Viitorul Web-ului - Web 3.0", "url": "https://www.youtube.com/watch?v=libKVRa01L8" }

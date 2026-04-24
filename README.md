@@ -33,16 +33,19 @@
 {
   "playlists": [
     {
-      "title": "Numele Secțiunii (ex: Podcasturi)",
+      "title": "Muzică Rock & Classic",
       "videos": [
-        {
-          "title": "Cum să citești mai repede",
-          "url": "https://www.youtube.com/watch?v=EXEMPLU"
-        },
-        {
-          "title": "Muzică Lofi pentru relaxare",
-          "url": "https://youtu.be/EXEMPLU2"
-        }
+        { "title": "Solo-uri legendare din Rock", "url": "https://www.youtube.com/watch?v=mIYzpCGuIjc" },
+        { "title": "Istoria formației Queen", "url": "https://www.youtube.com/watch?v=Dx5qFachd3A" },
+        { "title": "Cum se orchestrează un film?", "url": "https://www.youtube.com/watch?v=mIYzpCGuIjc" }
+      ]
+    },
+    {
+      "title": "Podcasturi Extra-Lungi",
+      "videos": [
+        { "title": "Podcast #01 - Despre Originile Universului (3 Ore)", "url": "https://www.youtube.com/watch?v=p7bobijCE4w" },
+        { "title": "Podcast #02 - Inteligența Artificială în 2025", "url": "https://www.youtube.com/watch?v=aircAruvnKk" },
+        { "title": "Povești Antreprenoriale de Succes - 4 Ore Editie", "url": "https://www.youtube.com/watch?v=fENyEI0oQaw" }
       ]
     }
   ]
