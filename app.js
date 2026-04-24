@@ -138,7 +138,7 @@ function renderSidebar() {
         const btn = document.createElement('button');
         // Adăugăm un atribut data pentru manipulare dinamică (aprindere)
         btn.dataset.id = pl.id;
-        btn.className = "w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-zinc-600 dark:text-zinc-400 hover:bg-white/50 dark:hover:bg-white/5 hover:text-zinc-900 dark:hover:text-white transition-all group text-[14px] font-medium border border-transparent hover:border-zinc-200/50 dark:hover:border-white/5 shadow-sm hover:shadow-md";
+        btn.className = "w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-zinc-600 dark:text-zinc-400 hover:bg-white/50 dark:hover:bg-white/5 hover:text-zinc-900 dark:hover:text-white transition-all group text-[18px] font-medium border border-transparent hover:border-zinc-200/50 dark:hover:border-white/5 shadow-sm hover:shadow-md";
         btn.innerHTML = `<span class="truncate">${pl.name}</span>`;
         btn.onclick = () => renderPlaylist(pl.id);
         plDiv.appendChild(btn);
